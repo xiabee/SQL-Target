@@ -1,0 +1,56 @@
+version: "3"
+services:
+    nginx:
+        links:
+            - php
+        image: nginx:latest
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - ./www:/var/www/html
+            # nginx和php必须同时映射才能通信
+        restart: always
+        environment: 
+            TZ: Asia/Shanghai
+        ports:
+            - "5000:80"
+        networks:
+            - default
+    
+    php:
+        image: xiabee/php7.3-fpm
+        build: ./php
+        volumes: 
+            - ./php/php.ini:/usr/local/etc/php/php.ini
+            - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./www:/var/www/html
+            # nginx和php必须同时映射才能通信
+        environment: 
+            TZ: Asia/Shanghai
+        restart: always
+        networks:
+            - default
+            
+    mysql:
+        links: 
+            - php
+        image: mysql:5.7
+        volumes: 
+            - ./mysql/my.cnf:/etc/mysql/my.cnf
+            - ./www:/var/www/html
+            - ./flag:/etc/mysql/flag:ro
+            - ./mysql/init:/docker-entrypoint-initdb.d/
+            # docker-entrypoint-initdb.d目录下的文件会自动执行
+        environment: 
+            MYSQL_ROOT_PASSWORD: Xiao
+            # 设置管理员密码
+            MYSQL_USER: test
+            MYSQL_PASSWORD: test
+            # 创建用户
+            TZ: Asia/Shanghai
+            LANG: C.UTF-8
+        restart: always
+        networks:
+            - default
+
+networks:
+    default:
