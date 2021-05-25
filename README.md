@@ -4,9 +4,13 @@
 
 
 
-#### 项目模板
 
-https://github.com/xiabee/LNMP-Docker
+
+#### 靶机模板
+
+* `LNMP`框架
+
+* 模板地址：https://github.com/xiabee/LNMP-Docker
 
 
 
@@ -30,3 +34,7 @@ docker-compose up -d
 
 
 
+#### POC内容
+
+* 布尔盲注获得`Flag`
+* 联合查询写入`WEBSHELL`并连接
