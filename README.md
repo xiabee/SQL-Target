@@ -1,5 +1,12 @@
 # SQL-Target
-* 基于布尔盲注与联合查询的`GETSHELL`渗透实战攻击
+* BIT网络于信息安全大作业：实现一次SQL注入攻击
+* 最终实现：基于布尔盲注与联合查询的`GETSHELL`渗透实战攻击
+
+
+
+#### 项目模板
+
+https://github.com/xiabee/LNMP-Docker
 
 
 
@@ -8,39 +15,18 @@
 * 靶机：`./target`
 * `POC`：`./poc`
 
-```bash
-.
-├── poc
-│   ├── README.md
-│   ├── requirement.txt
-│   └── sqli-getshell.py
-├── README.md
-└── target
-    ├── docker-compose.yml
-    ├── flag
-    │   └── FLAG
-    ├── mysql
-    │   ├── init
-    │   │   ├── privileges.sql
-    │   │   └── schema.sql
-    │   └── my.cnf
-    ├── nginx
-    │   └── nginx.conf
-    ├── php
-    │   ├── Dockerfile
-    │   ├── php-fpm.conf
-    │   └── php.ini
-    ├── README.md
-    └── www
-        ├── config.php
-        ├── FLAG
-        ├── index.php
-        └── Ruby_files
-            ├── bulma.js
-            ├── bulma.min.css
-            ├── fa.js
-            └── site.css
 
-10 directories, 20 files
+
+#### 部署方式
+
+```bash
+git clone https://github.com/xiabee/SQL-Target
+cd ./SQL-Target/target
+sudo chmod 777 -R www
+# 需要给写入权限，否则无法完成getshell
+
+docker-compose up -d
 ```
+
+
 
